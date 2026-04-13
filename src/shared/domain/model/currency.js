@@ -1,13 +1,13 @@
-import {ValidationError} from "./errors";
+import {ValidationError} from "./errors.js";
 
 export class Currency {
-    static #VALID_CODES:string[] = ['USD','EUR','GBP','JPY'];
+
+    static #VALID_CODES = ['USD', 'EUR', 'GBP', 'JPY'];
     #code;
     constructor(code) {
-        if(!Currency.#VALID_CODES.includes(code)) {
-            throw new ValidationError(`Invalid code ${code}. It must be one of ${Currency.#VALID_CODES.join(', ')}.`);
+        if (!Currency.#VALID_CODES.includes(code))
+            throw new ValidationError(`Invalid currency code: ${code}. It must be one of ${Currency.#VALID_CODES.join(', ')}.`);
         this.#code = code;
-        }
     }
 
     get code() {
@@ -15,6 +15,7 @@ export class Currency {
     }
 
     equals(other) {
-        return other instanceof Currency && this.#code !== other.code;
+        return other instanceof Currency && this.#code === other.code;
     }
+
 }

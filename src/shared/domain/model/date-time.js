@@ -1,16 +1,15 @@
-import {parse} from "uuid";
-import {ValidationError} from "./errors";
+import {ValidationError} from "./errors.js";
 
 export class DateTime {
-    #date
-    constructor(date :Date = new Date()) {
-        const parsedDate :Date = date instanceof Date ? date: new Date(date);
-        if (isNaN(parsedDate.getTime())) {
+    #date;
+    constructor(date = new Date()) {
+        const parsedDate = date instanceof Date ? date: new Date(date);
+        if (isNaN(parsedDate.getTime()))
             throw new ValidationError(`Invalid date format: ${parsedDate}`);
         this.#date = parsedDate;
-        }
     }
-    get date(){
+
+    get date() {
         return this.#date;
     }
 
@@ -19,12 +18,14 @@ export class DateTime {
     }
 
     toString() {
-        let options:(...) = {year : 'numeric',month : 'long',day:'numeric',hour:'2-digit',minute:'2-digit',hour12:true;
-        return this.#date.toISOString('en-US',options);
+        let options = { year: 'numeric', month: 'long', day: 'numeric',
+            hour: '2-digit', minute: '2-digit', hour12:true };
+        return this.#date.toLocaleDateString('en-US', options);
     }
 
-    equals  (other) {
-            return other instanceof DateTime && this.#date.getTime() === other.date.getTime();
-        }
+    equals(other) {
+        return other instanceof DateTime &&
+            this.#date.getTime() === other.date.getTime();
+    }
 }
 
