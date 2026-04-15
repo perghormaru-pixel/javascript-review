@@ -28,4 +28,3 @@ export class DateTime {
             this.#date.getTime() === other.date.getTime();
     }
 }
-

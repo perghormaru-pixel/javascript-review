@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "TYPE": "module",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node init && node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
